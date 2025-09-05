@@ -7,9 +7,10 @@ from src.exception import CustomException
 from src.logger import logging
 
 
-def load_dataset(dir_path, image_size=(128,128)):
-    images = []
+def load_dataset(dir_path):
+    # image = []
     labels = []
+    image_paths = []
     classes = ["Real", "Fake"]
 
     try:
@@ -19,13 +20,14 @@ def load_dataset(dir_path, image_size=(128,128)):
             for file in os.listdir(path):
                 file_path = os.path.join(path,file)
                 
-                image = cv2.imread(file_path)
+                # image = cv2.imread(file_path)
 
-                if image is None:
-                    continue
+                # if image is None:
+                    # continue
 
-                image = cv2.resize(image, image_size)
-                images.append(image)
+                # image = cv2.resize(image, image_size)
+                # images.append(image)
+                image_paths.append(file_path)
 
                 if label == "Real":
                     labels.append(1)
@@ -33,15 +35,16 @@ def load_dataset(dir_path, image_size=(128,128)):
                     labels.append(0)
         logging.info("Loading conplete")
 
-        images = np.array(images, dtype='float32') / 255.0
+        # images = np.array(images, dtype='float32')
         labels = np.array(labels)
 
         logging.info("Returning images and labels")
         
-        return images, labels
+        return image_paths, labels
     
     except Exception as e:
         raise CustomException(e,sys)
+    
 
 
 
