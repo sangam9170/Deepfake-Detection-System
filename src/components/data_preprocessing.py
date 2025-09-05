@@ -55,8 +55,8 @@ def preprocess_images(images_path):
         raise CustomException(e,sys)
 
 
-if __name__=="__main__":
-    img_path, labels = load_dataset(r"Dataset\Train")
-    X = preprocess_images(img_path)
-    print(X.shape)
+# if __name__=="__main__":
+#     img_path, labels = load_dataset(r"Dataset\Train")
+#     X = preprocess_images(img_path)
+#     print(X.shape)
 
