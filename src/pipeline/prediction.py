@@ -3,7 +3,7 @@ import numpy as np
 
 from tensorflow.keras.models import load_model
 
-model = load_model(r'saved_models\model1.h5')
+model = load_model('saved_models\\model1.h5')
 
 def prediction(path):
     image = cv2.imread(path)
