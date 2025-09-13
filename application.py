@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 
 # Load model
 
-model = load_model("saved_models\\model1.h5")
+model = load_model("saved_models/model1.h5")
 
 def predict(image: Image.Image):
     """
