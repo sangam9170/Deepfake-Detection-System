@@ -1,4 +1,3 @@
-import cv2
 import numpy as np
 import os
 import sys
@@ -8,7 +7,6 @@ from src.logger import logging
 
 
 def load_dataset(dir_path):
-    # image = []
     labels = []
     image_paths = []
     classes = ["Real", "Fake"]
@@ -20,22 +18,14 @@ def load_dataset(dir_path):
             for file in os.listdir(path):
                 file_path = os.path.join(path,file)
                 
-                # image = cv2.imread(file_path)
-
-                # if image is None:
-                    # continue
-
-                # image = cv2.resize(image, image_size)
-                # images.append(image)
                 image_paths.append(file_path)
 
                 if label == "Real":
                     labels.append(1)
                 else:
                     labels.append(0)
-        logging.info("Loading conplete")
+        logging.info("Loading complete")
 
-        # images = np.array(images, dtype='float32')
         labels = np.array(labels)
 
         logging.info("Returning images and labels")
@@ -44,14 +34,6 @@ def load_dataset(dir_path):
     
     except Exception as e:
         raise CustomException(e,sys)
-    
-
-
-
-# if __name__=="__main__":
-#     img, labels = load_dataset('Dataset\Train')
-#     print(f"image shape : {img.shape}, labels shape : {labels.shape}")
-
 
 
 

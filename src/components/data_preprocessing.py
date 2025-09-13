@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import sys
 
-from src.components.data_loader import load_dataset
 from src.exception import CustomException
 from src.logger import logging
 
@@ -38,7 +37,7 @@ except Exception as e:
 
 
 
-def preprocess_images(images_path):
+def preprocess_images(images_path ,labels):
     preprocessed = []
 
     try:
@@ -49,14 +48,10 @@ def preprocess_images(images_path):
             preprocessed.append(face)
         
         logging.info("Preprocess complete")
-        return np.array(preprocessed)/255.0
+        return np.array(preprocessed, dtype=np.float32)/255.0, labels
     
     except Exception as e:
         raise CustomException(e,sys)
 
 
-# if __name__=="__main__":
-#     img_path, labels = load_dataset(r"Dataset\Train")
-#     X = preprocess_images(img_path)
-#     print(X.shape)
 
