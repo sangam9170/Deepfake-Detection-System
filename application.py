@@ -1,4 +1,5 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 import cv2
@@ -58,9 +59,35 @@ if uploaded_file is not None:
             label, confidence = predict(image)
 
         # Show result
-        if label == "Real":
+        # if label == "Real":
+        #     st.success(f"✅ Prediction: {label} ({confidence*100:.1f}% confidence)")
+        # else:
+        #     st.error(f"⚠️ Prediction: {label} ({confidence*100:.1f}% confidence)")
+
+
+        # Show textual result
+        if label == 'Real':
             st.success(f"✅ Prediction: {label} ({confidence*100:.1f}% confidence)")
         else:
-            st.error(f"⚠️ Prediction: {label} ({confidence*100:.1f}% confidence)")
+            st.error(f"❌ Prediction: {label} ({confidence*100:.1f}% confidence)")
+
+        # -------------------------------
+        # Plot prediction confidence graph
+        # -------------------------------
+        st.subheader("📊 Prediction Confidence")
+
+        # Create a simple bar chart
+        fig, ax = plt.subplots(figsize=(3, 2)) 
+        categories = ['Real', 'Fake']
+        values = [confidence*100, (1-confidence)*100] if label == 'Real' else [(1-confidence)*100, confidence*100]
+
+        ax.bar(categories, values, color=['green', 'red'])
+        ax.set_ylim(0, 100)
+        ax.set_ylabel("Confidence (%)")
+        ax.set_title("Model Confidence Levels")
+
+        # Display the chart in Streamlit
+        st.pyplot(fig)
+
 
 
